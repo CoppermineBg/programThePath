@@ -3,6 +3,17 @@ body {
 	margin: 0px;
 }
 
+h1 {
+	position: absolute;
+	width: 600px;
+	text-align: center;
+	top: 100px;
+	left: 50%;
+	margin-left: -300px;
+	color: #3f025c;
+	font-size: 150px;
+}
+
 nav.controls {
 	background-color: #b0bb9c;
 	width: 100%
@@ -61,5 +72,10 @@ main > div.player {
 
 main > div.exit {
 	background-color: #caaaa8;
+	border-color: #8a0700;
+}
+
+main > div.exit.player {
+	background-color: #807186;
 	border-color: #8a0700;
 }
