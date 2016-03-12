@@ -19,6 +19,8 @@ var mapsLibrary = [
 
 var main;
 var path;
+var playerPosition = {x: 0, y: 0};
+var currentMap;
 
 const boxWidth = 80;
 const boxMargin = 5;
@@ -40,9 +42,14 @@ function initLevel(map) {
 	for (var i in map) {
 		var row = map[i];
 		for (var j in row) {
+			if (row[j] == 3) {
+				playerPosition.x = i;
+				playerPosition.y = j;
+			}
 			main.append(createBlock(row[j]));
 		}
 	}
+	currentMap = map;
 }
 
 function createBlock(type) {
@@ -103,10 +110,59 @@ function createPathStep(type) {
 }
 
 function tracePath() {
+	var gameEnded = false;
 	path.children().each(function(idx, step) {
-		var move = $(step).data("action");
-		console.log(move)
+		if (!gameEnded) {
+			var move = $(step).addClass("played").data("action");
+			switch (move) {
+				case "left":
+					playerPosition.x--;
+					break;
+
+				case "up":
+					playerPosition.y--;
+					break;
+
+				case "down":
+					playerPosition.y++;
+					break;
+
+				case "right":
+					playerPosition.x++;
+					break;
+			}
+
+			try {
+				var blockType = currentMap[playerPosition.y][playerPosition.x];
+				if (typeof blockType == "undefined") {
+					gameEnded = endGame(false);
+				} else {
+					switch (blockType) {
+						case 1: //wall
+							gameEnded = endGame(false);
+							break;
+
+						case 2: //exit
+							gameEnded = endGame(true);
+							break;
+					}
+				}
+			} catch (e) {
+				gameEnded = endGame(false);
+			}
+		}
 	});
+}
+
+function endGame(type)
+{
+	if (type) {
+		alert("You Win!");
+	} else {
+		alert("You loose!");
+	}
+
+	return true;
 }
 
 

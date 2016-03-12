@@ -31,6 +31,10 @@ nav.path > i {
 	padding: 0px 2px;
 }
 
+nav.path > i.played {
+	color: #807186;
+}
+
 main
 {
 	margin: auto;
