@@ -1,5 +1,5 @@
 /**
- * Created by Juri on 12.3.2016 ã..
+ * Created by Juri on 12.3.2016 ï¿½..
  */
 
 var mapsLibrary = [
@@ -36,7 +36,7 @@ const boxWidth = 80;
 const boxMargin = 5;
 const boxBorder = 1;
 
-$(document).keypress(function(e) {
+$(document).keydown(function(e) {
 	switch (e.keyCode) {
 		case 37: //left
 			if (loadedMapIndex > 0) {
